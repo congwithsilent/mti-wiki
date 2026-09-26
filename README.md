@@ -1,12 +1,29 @@
-# MTI 备考 Wiki（本地预览）
+# MTI 备考 Wiki
 
-从 `D:\BaiduNetdiskDownload\MTI` 这个 Obsidian Vault 生成知识库站点，用 [Quartz v5](https://quartz.jzhao.xyz/)（MIT 许可）。
+从 `D:\BaiduNetdiskDownload\MTI` 这个 Obsidian Vault 生成公开备考知识库站点，用 [Quartz v5](https://quartz.jzhao.xyz/)（MIT 许可）。
 
-当前只接入了 **Glossary** 一个目录，共 10 篇笔记，用来确认框架效果。这是独立项目，与博客仓库无关。
+## 同步范围
+
+`预览wiki.bat` 会从 Vault 中筛选以下目录的 Markdown 文件同步到 `content/`：
+
+| Vault 目录 | content 目录 | 规则 |
+| --- | --- | --- |
+| Glossary | Glossary | 全量 |
+| 01_2026年考纲 | 01_考纲 | 全量（官方文件） |
+| 00_山大真题_核心资产 | 00_真题 | 仅 md，排除 2026 |
+| 211_基英_写作模版 | 211_基英写作 | 全量 md |
+| 357_翻译基础 | 357_翻译基础 | 全量 md |
+| 448_百科_应用文写作 | 448_百科 | 全量 md |
+| 99_教材清单_碎片整理 | 99_教材碎片 | 全量 md |
+| Inbox | Inbox | 白名单逐文件 |
+
+**不同步的目录**：02_外刊阅读材料（版权，改为引用链接）、copilot、Diary、玥涵档案、.obsidian、.claude、.workbuddy、Templates、90_工具_自动化。
+
+**PDF / docx 一律不上传**，同步脚本只拷贝 `*.md`。
 
 ## 怎么跑
 
-双击 `预览wiki.bat`，它会先把 Vault 里的 Glossary 笔记镜像同步到 `content/Glossary`，再在 <http://localhost:8080> 起预览服务，关掉窗口即停止。
+双击 `预览wiki.bat`，它会自动同步笔记并启动本地预览，关掉窗口即停止。
 
 手动方式：
 
@@ -47,14 +64,9 @@ npx quartz build                  # 只构建，产物在 public/
 
 正确做法是保持 enabled，用 `hidePropertiesView: true` 只隐藏展示。
 
-## 隐私与版权提醒
+## 版权策略
 
-Quartz 的过滤器只过滤 Markdown，**非 Markdown 文件（PDF、docx、图片）会被无条件发布**。所以 `content/` 里只能放筛过的笔记，绝不能把整个 Vault 目录指过来——Vault 里有 93 个 PDF/docx 共 865MB。
-
-Glossary 这一批是纯术语表，没有版权和隐私问题，可以放心预览。
-
-## 现状与下一步
-
-- Glossary 的 10 篇笔记内部**没有互相链接**，所以现在反链和关系图谱基本是空的，只有首页指向它们。Wiki 的双链价值要等接入真题、翻译复盘这些真正互相引用的笔记之后才体现。
-- 这批笔记几乎全是 4-6 列的大表格，在 1037px 宽度下不溢出；手机窄屏还需要再验证。
-- 下一步候选：`01_2026年考纲`、`211_基英_写作模版`、`448_百科_应用文写作`。
+- 外刊（经济学人等）不直接发布，改为引用社区整理仓库
+- 山大 2026 真题不上传（一手整理，版权风险）
+- 商业出版教材 PDF（张培基、张剑黄皮书、52MTI 等）不上传
+- AI 对话记录、日记、个人档案不上传
