@@ -1,3 +1,414 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ============================================================
+// MTI 备考 Wiki 定制样式
+// 目标：Wikipedia 式阅读页 + 左侧站点工具抽屉 + 右侧目录浮层。
+// Quartz 基础样式在 @layer quartz-base；插件 CSS 后加载，冲突处需 !important。
+// ============================================================
+
+:root {
+  --bodyFont: "Segoe UI", "Helvetica Neue", Arial, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --headerFont: "Segoe UI", "Helvetica Neue", Arial, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --wiki-text: #202122;
+  --wiki-link: #3366cc;
+  --wiki-link-visited: #795cb2;
+  --wiki-border: #c8ccd1;
+  --wiki-muted: #54595d;
+  --wiki-table-bg: #f8f9fa;
+}
+
+// ---------- 1. 布局：主栏占满，侧栏全部改为浮层 ----------
+.page > #quartz-body {
+  grid-template-columns: minmax(0, 1fr) !important;
+
+  @media all and ($tablet) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  @media all and ($mobile) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+.page > #quartz-body > .center {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 55rem;
+  min-width: 0 !important;
+  margin: 0 auto;
+  padding: 5.2rem 1.25rem 3rem;
+}
+
+// ---------- 2. Wikipedia 式正文排版 ----------
+.page > #quartz-body .center {
+  color: var(--wiki-text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.page > #quartz-body article {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.page > #quartz-body article p,
+.page > #quartz-body article li {
+  color: var(--wiki-text);
+  line-height: 1.7;
+}
+
+.page > #quartz-body article p {
+  margin: 0.85rem 0;
+}
+
+.page > #quartz-body article ul,
+.page > #quartz-body article ol {
+  margin: 0.75rem 0;
+  padding-left: 1.9rem;
+}
+
+.page > #quartz-body article li {
+  margin: 0.32rem 0;
+}
+
+.page > #quartz-body article h1,
+.page > #quartz-body article h2,
+.page > #quartz-body article h3,
+.page > #quartz-body article h4,
+.page > #quartz-body article h5,
+.page > #quartz-body article h6 {
+  color: #000;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 0.55rem;
+}
+
+.page > #quartz-body article h1 {
+  font-size: 1.85rem;
+  margin-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.page > #quartz-body article h2 {
+  font-size: 1.45rem;
+  margin-top: 1.9rem;
+  padding-bottom: 0.22rem;
+  border-bottom: 1px solid var(--wiki-border);
+}
+
+.page > #quartz-body article h3 {
+  font-size: 1.18rem;
+  margin-top: 1.45rem;
+}
+
+.page > #quartz-body article h4,
+.page > #quartz-body article h5,
+.page > #quartz-body article h6 {
+  font-size: 1rem;
+  margin-top: 1.2rem;
+}
+
+// 链接回归普通 wiki 链接：不用彩色胶囊底纹。
+.page > #quartz-body a {
+  font-weight: 400;
+  color: var(--wiki-link);
+}
+
+.page > #quartz-body a:hover {
+  color: var(--wiki-link);
+  text-decoration: underline;
+}
+
+.page > #quartz-body a:visited {
+  color: var(--wiki-link-visited);
+}
+
+.page > #quartz-body a.internal {
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  line-height: inherit;
+}
+
+.page > #quartz-body article blockquote {
+  margin: 1rem 0;
+  padding: 0.65rem 1rem;
+  color: var(--wiki-muted);
+  background: var(--wiki-table-bg);
+  border: 1px solid var(--wiki-border);
+  border-left: 4px solid var(--wiki-border);
+  border-radius: 2px;
+}
+
+.page > #quartz-body article blockquote p {
+  margin: 0;
+}
+
+// Wikipedia 风格表格：细边框、灰表头，去掉多余外边距。
+.page > #quartz-body .table-container {
+  margin: 1rem 0;
+}
+
+.page > #quartz-body .table-container > table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--wiki-border);
+  background: #fff;
+  border-collapse: collapse;
+}
+
+.page > #quartz-body .table-container th,
+.page > #quartz-body .table-container td {
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--wiki-border);
+  vertical-align: top;
+}
+
+.page > #quartz-body .table-container th {
+  background: var(--wiki-table-bg);
+  color: var(--wiki-text);
+  font-weight: 600;
+  border-bottom: 1px solid var(--wiki-border);
+  white-space: nowrap;
+}
+
+.page > #quartz-body .table-container tr {
+  border-bottom: 0;
+}
+
+// ---------- 3. 左侧整栏：收进“菜单”弹出抽屉 ----------
+.page > #quartz-body > .sidebar.left {
+  position: fixed !important;
+  top: 0.7rem;
+  left: 0.7rem;
+  z-index: 260;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+// 收起时整栏只保留菜单入口。
+.page > #quartz-body > .sidebar.left > * {
+  display: none !important;
+}
+
+.page > #quartz-body > .sidebar.left .explorer {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  width: auto;
+}
+
+.explorer button.desktop-explorer {
+  display: none !important;
+}
+
+.explorer button.mobile-explorer {
+  display: flex !important;
+  align-items: center;
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  background: #fff;
+  border: 1px solid var(--wiki-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: var(--wiki-text);
+  font-weight: 500;
+}
+
+.explorer button.mobile-explorer::after {
+  content: "菜单";
+  margin-left: 0.4rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.explorer .explorer-content {
+  display: none !important;
+  position: static !important;
+  transform: none !important;
+  visibility: hidden !important;
+  width: 100% !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+// 打开后，整个左栏（站点名、搜索、模式、阅读模式、目录树）都在抽屉里。
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) {
+  top: 0 !important;
+  left: 0 !important;
+  width: min(320px, 86vw) !important;
+  height: 100dvh !important;
+  padding: 1rem !important;
+  background: #fff !important;
+  border-right: 1px solid var(--wiki-border) !important;
+  box-shadow: 0.25rem 0 1.8rem rgba(0, 0, 0, 0.16) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.75rem !important;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > * {
+  display: revert !important;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > .mobile-only {
+  display: none !important;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > .page-title {
+  order: 1;
+  font-size: 1.1rem;
+  margin: 2.6rem 0 0.25rem;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > .page-title a {
+  color: var(--wiki-text);
+  text-decoration: none;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > .page-title a:hover {
+  text-decoration: underline;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > .flex-component {
+  order: 2;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start;
+  gap: 0.5rem !important;
+  width: 100%;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) > .explorer {
+  order: 3;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0;
+  width: 100%;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .explorer > button.mobile-explorer {
+  position: absolute !important;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .explorer-content {
+  display: block !important;
+  visibility: visible !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin-top: 0.35rem !important;
+  overflow: hidden auto !important;
+}
+
+.explorer:not(.collapsed) button.mobile-explorer::after {
+  content: "关闭";
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .search {
+  width: 100%;
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .search-button {
+  width: 100%;
+  border: 1px solid var(--wiki-border);
+  border-radius: 4px;
+  background: var(--wiki-table-bg);
+  color: var(--wiki-muted);
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .explorer-content ul li > a,
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .folder-container div > a,
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .folder-container div > button span {
+  color: var(--wiki-text);
+}
+
+.page > #quartz-body > .sidebar.left:has(.explorer:not(.collapsed)) .explorer-content ul li > a.active {
+  color: var(--wiki-link);
+}
+
+html.mobile-no-scroll {
+  overflow: hidden;
+}
+
+// ---------- 4. 右侧目录：右下角浮层 ----------
+.page > #quartz-body > .sidebar.right {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 150;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+  width: min(320px, calc(100vw - 1.8rem));
+  height: auto !important;
+  max-height: 72dvh;
+  margin: 0 !important;
+  padding: 0.55rem 0.85rem !important;
+  background: #fff;
+  border: 1px solid var(--wiki-border);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.page > #quartz-body > .sidebar.right:not(:has(*)) {
+  display: none !important;
+}
+
+.page > #quartz-body > .sidebar.right > .toc {
+  display: flex !important;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.page > #quartz-body > .sidebar.right > .toc > .toc-content {
+  max-height: calc(72dvh - 3.5rem);
+  overflow-y: auto;
+}
+
+.toc:has(button.toc-header.collapsed) > .toc-content {
+  display: none;
+}
+
+.page > #quartz-body > .sidebar.right .toc-header,
+.page > #quartz-body > .sidebar.right .toc-content a {
+  color: var(--wiki-text);
+}
+
+.page > #quartz-body > .sidebar.right .toc-header:hover,
+.page > #quartz-body > .sidebar.right .toc-content a:hover {
+  color: var(--wiki-link);
+}
+
+// ---------- 5. 细节 ----------
+.article-title {
+  display: none !important;
+}
