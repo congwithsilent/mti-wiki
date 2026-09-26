@@ -11,12 +11,37 @@
     "Microsoft YaHei", sans-serif;
   --headerFont: "Segoe UI", "Helvetica Neue", Arial, "PingFang SC",
     "Microsoft YaHei", sans-serif;
+
+  // 以下 --wiki-* 是本站自己的配色令牌，全部在 :root 定义浅色值，
+  // 再在 :root[saved-theme="dark"] 覆盖深色值。写死颜色会导致暗色模式下
+  // 出现「黑字黑底 / 白底刺眼」的问题，所以只允许引用这些变量。
   --wiki-text: #202122;
+  --wiki-heading: #000;
   --wiki-link: #3366cc;
   --wiki-link-visited: #795cb2;
   --wiki-border: #c8ccd1;
   --wiki-muted: #54595d;
   --wiki-table-bg: #f8f9fa;
+  --wiki-surface: #fff;
+  --wiki-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --wiki-shadow-lg: 0 2px 10px rgba(0, 0, 0, 0.12);
+  --wiki-shadow-drawer: 0.25rem 0 1.8rem rgba(0, 0, 0, 0.16);
+}
+
+// 暗色模式：属性由 quartz 的 darkmode 插件写在 <html> 上。
+// 取值参考 quartz.config.yaml 里的 darkMode 调色板，保证和正文背景同一灰阶体系。
+:root[saved-theme="dark"] {
+  --wiki-text: #dcdcdc;
+  --wiki-heading: #f0f0f0;
+  --wiki-link: #8ab4f8;
+  --wiki-link-visited: #c0a4f0;
+  --wiki-border: #45444b;
+  --wiki-muted: #a8a8ad;
+  --wiki-table-bg: #2b2b30;
+  --wiki-surface: #232326;
+  --wiki-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --wiki-shadow-lg: 0 2px 10px rgba(0, 0, 0, 0.55);
+  --wiki-shadow-drawer: 0.25rem 0 1.8rem rgba(0, 0, 0, 0.6);
 }
 
 // ---------- 1. 布局：主栏占满，侧栏全部改为浮层 ----------
@@ -79,7 +104,7 @@
 .page > #quartz-body article h4,
 .page > #quartz-body article h5,
 .page > #quartz-body article h6 {
-  color: #000;
+  color: var(--wiki-heading);
   font-weight: 500;
   line-height: 1.3;
   margin-bottom: 0.55rem;
@@ -156,7 +181,7 @@
   margin: 0;
   padding: 0;
   border: 1px solid var(--wiki-border);
-  background: #fff;
+  background: var(--wiki-surface);
   border-collapse: collapse;
 }
 
@@ -166,6 +191,7 @@
   padding: 0.5rem 0.7rem;
   border: 1px solid var(--wiki-border);
   vertical-align: top;
+  color: var(--wiki-text);
 }
 
 .page > #quartz-body .table-container th {
@@ -220,10 +246,10 @@
   align-items: center;
   margin: 0;
   padding: 0.45rem 0.6rem;
-  background: #fff;
+  background: var(--wiki-surface);
   border: 1px solid var(--wiki-border);
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--wiki-shadow);
   color: var(--wiki-text);
   font-weight: 500;
 }
@@ -257,9 +283,9 @@
   width: min(320px, 86vw) !important;
   height: 100dvh !important;
   padding: 1rem !important;
-  background: #fff !important;
+  background: var(--wiki-surface) !important;
   border-right: 1px solid var(--wiki-border) !important;
-  box-shadow: 0.25rem 0 1.8rem rgba(0, 0, 0, 0.16) !important;
+  box-shadow: var(--wiki-shadow-drawer) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
@@ -372,10 +398,10 @@ html.mobile-no-scroll {
   max-height: 72dvh;
   margin: 0 !important;
   padding: 0.55rem 0.85rem !important;
-  background: #fff;
+  background: var(--wiki-surface);
   border: 1px solid var(--wiki-border);
   border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--wiki-shadow-lg);
   overflow: hidden;
 }
 
