@@ -28,6 +28,4 @@ title: MTI 备考 Wiki
 
 ## 关于本站
 
-- 使用 [Quartz v5](https://quartz.jzhao.xyz/)（MIT 许可）从 Obsidian 笔记生成
 - 部署在 [Cloudflare Pages](https://pages.cloudflare.com/)
-- 源码：[GitHub](https://github.com/congwithsilent/mti-wiki)
