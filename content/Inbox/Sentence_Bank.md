@@ -204,3 +204,20 @@ count: 7
 - **精神上永不颓废**：remain spiritually strong / stay spiritually robust
 - **句型结构铁律**：studying... is not merely...（动名词作主语，**严禁使用 we research... is not... 双重谓语**）
 - **情态动词铁律**：情态动词后强制跟动词原形（**绝不能写 should aims / will says，连续第 6 次警报**）
+
+### 2026-09-26 批次（211 议论文 · 机器翻译时代的语言学习价值）
+- **做某事是值得的**：be worthwhile doing / to do 或 be worth doing（**严禁写 is still worthy to acquire**；worthy 通常搭配 of 或用于被动 be worthy to be done）
+- **促使/引起某人做某事**：prompt sb. to do / lead sb. to do / spark debate（**arise 是不及物动词，严禁接宾语写成 this arises some argue**）
+- **花时间做某事**：spend time (in) doing sth（**固定搭配接动名词，严禁接不定式 spend years to acquire**）
+- **不可替代的**：irreplaceable（**拼写核验：ir-re-place-able，保留 e，严禁漏写成 irreplacable**）
+- **尖端的/精密的**：sophisticated（**拼写核验：so-phis-ti-ca-ted，切勿漏写中间的 ti**）
+- **误解/曲解（名词）**：misunderstanding / distortion / misinterpretation（**misunderstand 是动词，介词后必须用名词，严禁写 result in misunderstands**）
+- **与……紧密相连/交织**：be bound up with / be closely intertwined with（**bounded 是界限限制，严禁写 bounded with**）
+- **投入精力于……**：put effort into sth / invest effort in sth（**介词必须用 into/in，绝不能写 put effort on**）
+- **及物动词定从防冗余**：something that AI cannot replace（**replace 是及物动词，先行词作宾语，从句末尾绝不能加 with**）
+- **翻译成另一种语言**：translate sth. into another language（**介词用 into，非 to；单数可数名词 language 绝不能裸用 other language**）
+- **语言习得**：language acquisition（**专业术语，避免整篇连续 10 次车轱辘话重复使用 acquire/acquiring**）
+- **单一文化的狭隘**：monocultural insularity / cultural narrow-mindedness
+- **跨文化共情**：cross-cultural empathy / empathetic understanding
+- **潜台词与深层意蕴**：subtext / subtle undertones / implicit nuances
+- **语法连接铁律（防逗号流水句）**：避免多个祈使句用逗号直接连缀（Comma splice），正式学术议论文中转用名词化或完整主谓从句。
