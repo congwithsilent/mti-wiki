@@ -40,6 +40,7 @@ npx quartz build                  # 只构建，产物在 public/
 | `pageTitle` | `Quartz 5` → `MTI 备考 Wiki` | 站点标题 |
 | `analytics` | `plausible` → `null` | 本地预览不上报统计 |
 | `quartz-fonts.options.fontOrigin` | `googleFonts` → `selfHosted` | 默认会在页面里插 Google Fonts 的 `<link>`，国内阻塞渲染；改成构建时下载、本地托管（产物在 `public/static/fonts/`） |
+| 构建时字体下载 | 通过 `scripts/font-mirror.mjs` 走 loli.net 镜像 | Google Fonts 域名在国内无法直连，构建会 `fetch failed`；脚本用 `NODE_OPTIONS=--import` 在构建进程内把 `fonts.googleapis.com` / `fonts.gstatic.com` 重定向到镜像，`预览wiki.bat` 已自动带上 |
 | `@quartz-community/obsidian-plugin-excalidraw` | 移除 | 该包未发布，加载报错，且 Vault 里没有 Excalidraw 文件 |
 | `@quartz-community/graph` | `enabled: false` | 笔记之间没有互相引用，图谱是空的，没有意义 |
 | `@quartz-community/backlinks` | `enabled: false` | 同上 |
